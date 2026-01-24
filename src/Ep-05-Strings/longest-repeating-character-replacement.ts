@@ -18,10 +18,8 @@ function longestRepeatingCharacterReplacement(s: string, k: number): number {
     //replacement possibility
     let replacementNeeded = windowSize - maxFrequencyCountOfCharacter;
 
-    if (replacementNeeded > k) {
-      const leftChar = s[left];
-      map.set(leftChar, map.get(leftChar)! - 1);
-      left++;
+    if (replacementNeeded > k && map.get(currentChar)! >= left) {
+      left = map.get(currentChar)! + 1;
     }
 
     maxLength = Math.max(maxLength, right - left + 1);
@@ -31,7 +29,7 @@ function longestRepeatingCharacterReplacement(s: string, k: number): number {
 }
 
 // main
-const string = 'ABAB';
-const k = 2;
+const string = 'AABABBA';
+const k = 1;
 const longestRepeatingCharacterReplacementResult = longestRepeatingCharacterReplacement(string, k);
 console.log('length of longest Repeating Character Replacement is:', longestRepeatingCharacterReplacementResult);
